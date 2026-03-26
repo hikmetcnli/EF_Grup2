@@ -1,0 +1,33 @@
+﻿@using EF_Grup2.Models
+@model List<SatinAlma>
+
+<div class="col-12" style="text-align:right">
+	<a href="/Musteri/Ekle" class="btn btn-success">Müşteri Ekle</a>
+	<a href="/Arac/Ekle" class="btn btn-success">Araç Ekle</a>
+</div>
+<br />
+ 
+<table class="table table-bordered">
+	<tr>
+		<td>#</td>
+		<td>Müşteri</td>
+		<td>Araç</td>
+		<td>Satın Alma Tarihi</td>
+		<td>Satın Alma Fiyatı</td>
+	</tr>
+
+	@foreach(var item in Model)
+	{
+		<tr>
+			<td>@item.Id </td>
+			<td>@item.musteri.Adi @item.musteri.Soyadi </td>
+			<td>@item.arac.Marka <b>(@item.arac.ModelYili) </b></td>
+			<td>@item.AlimTarihi</td>
+			<td>@item.AlimFiyati</td>
+		</tr>
+	}
+
+
+	
+
+</table>

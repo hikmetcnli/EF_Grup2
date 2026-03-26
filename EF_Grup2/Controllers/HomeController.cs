@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using EF_Grup2.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace EF_Grup2.Controllers
 {
@@ -8,23 +9,45 @@ namespace EF_Grup2.Controllers
     {
         Context c = new Context();
         public IActionResult Index()
-        { 
-            var ProductList = c.Products_.ToList(); 
+        {
+            var ProductList = c.Products_.ToList();
 
             return View(ProductList);
         }
-       
+
         [HttpGet]
-        public IActionResult UrunEkle()
+        public IActionResult UrunEkle(int Id)
         {
-            return View();
+            if (Id == 0) { //Yeni Ürün Ekle
+                return View();
+            }
+            else //Ürün Güncelleme
+            {
+                Product p1 = c.Products_.Find(Id);
+                return View(p1);
+            }
+
+
         }
         [HttpPost]
         public IActionResult UrunEkle(Product p)
         {
-            c.Products_.Add(p);
-            c.SaveChanges();
-            return RedirectToAction("Index", "Home");
+            if (p.Id == 0) //Yeni Ürün Ekle
+            {
+                c.Products_.Add(p);
+                c.SaveChanges();
+            }
+            else
+            {
+                var guncellenecekurun = c.Products_.Find(p.Id);
+                guncellenecekurun.Name= p.Name;
+                guncellenecekurun.Description= "...";
+                //guncellenecekurun.Price= p.Price;
+
+                c.SaveChanges() ;
+            }
+
+                return RedirectToAction("Index", "Home");
         }
 
         public IActionResult UrunSil(int id)
@@ -46,6 +69,27 @@ namespace EF_Grup2.Controllers
         {
             return View();
         }
-         
+
+        public IActionResult DepartmanList()
+        {
+            var liste = new List<SelectListItem>();
+
+            foreach(var item in c.DepartmanList_.ToList())
+            {
+                liste.Add(new SelectListItem
+                {
+                    Value = item.Id.ToString(),Text=item.Name
+                });
+            }
+
+            ViewBag.DepartmanListe = liste;
+
+            ViewBag.AAA = "DOÐAN UÐUR";
+            ViewBag.BBB = "HÝKMET CANLI";
+            ViewBag.CCC = c.DepartmanList_.ToList();
+
+            return View();
+        }
+
     }
 }

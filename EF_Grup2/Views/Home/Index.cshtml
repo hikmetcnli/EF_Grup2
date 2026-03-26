@@ -1,6 +1,10 @@
 ﻿@using EF_Grup2.Models
 @model List<Product>
 
+	<div class="col-12" style="text-align:right">
+		<a href="/Home/UrunEkle" class="btn btn-success">Ürün Ekle</a>
+	</div>
+
 <table class="table">
 	<thead>
 		<tr>
@@ -19,7 +23,9 @@
 				<td>@item.Name</td>
 				<td>@item.Description</td>
 				<td>@item.Price</td>
-				<td><a href="/Home/UrunSil/@item.Id" class="btn btn-danger">Ürünü Sil</a></td>
+				<td>
+					<a href="/Home/UrunEkle/@item.Id" class="btn btn-warning">Ürünü Düzenle</a>
+					<a href="/Home/UrunSil/@item.Id" class="btn btn-danger">Ürünü Sil</a></td>
 			</tr>
 		}
 	</tbody>

@@ -1,0 +1,18 @@
+﻿Buraya departman selectbox gelicek
+
+<select class="form-select" aria-label="Default select example">
+	@foreach (var item in ViewBag.DepartmanListe)
+	{
+		<option value="@item.Value"> @item.Text </option>
+	}
+	 
+</select>
+
+
+<select class="form-select" aria-label="Default select example">
+	@foreach (var item in ViewBag.CCC)
+	{
+		<option value="@item.Id"> @item.Name </option>
+	}
+
+</select>

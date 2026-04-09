@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace EF_Grup2.Migrations
 {
     /// <inheritdoc />
-    public partial class satinalma : Migration
+    public partial class fm : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -20,11 +20,25 @@ namespace EF_Grup2.Migrations
                     ModelYili = table.Column<int>(type: "int", nullable: false),
                     Marka = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Plaka = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
-                    Fiyar = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                    Fiyat = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
+                    ResimYolu = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_aracs", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "DepartmanList_",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_DepartmanList_", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -41,6 +55,21 @@ namespace EF_Grup2.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_musteris", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Products_",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(60)", maxLength: 60, nullable: false),
+                    Price = table.Column<decimal>(type: "decimal(18,2)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Products_", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -85,6 +114,12 @@ namespace EF_Grup2.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.DropTable(
+                name: "DepartmanList_");
+
+            migrationBuilder.DropTable(
+                name: "Products_");
+
             migrationBuilder.DropTable(
                 name: "satinalmas");
 

@@ -18,7 +18,8 @@ namespace EF_Grup2.Models
         [StringLength(20)]
         public string Plaka { get; set; }
 
-        public decimal Fiyar { get; set; }
+        public decimal Fiyat { get; set; }
 
+        public string ResimYolu { get; set; }
     }
 }

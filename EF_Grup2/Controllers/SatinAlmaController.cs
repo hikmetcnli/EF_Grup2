@@ -1,10 +1,12 @@
 ﻿using EF_Grup2.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 
 namespace EF_Grup2.Controllers
 {
+    [Authorize(Roles = "User")]
     public class SatinAlmaController : Controller
     {
         Context c = new Context();
@@ -22,6 +24,7 @@ namespace EF_Grup2.Controllers
             return View(SatinAlmaListe);
         }
 
+     
         [HttpGet]
         public IActionResult Create(int id)
         {

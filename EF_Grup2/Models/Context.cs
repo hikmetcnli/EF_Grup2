@@ -18,5 +18,7 @@ namespace EF_Grup2.Models
         public DbSet<Musteri> musteris { get; set; }
         public DbSet<SatinAlma> satinalmas { get; set; }
 
+        public DbSet<User> Users { get; set; }
+
     }
 }

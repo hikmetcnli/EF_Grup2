@@ -1,7 +1,18 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).
+    AddCookie(
+        x =>
+        {
+            x.Cookie.Name = "NETCORE.Auh";
+            x.LoginPath = "/Login/Index";
+            x.AccessDeniedPath = "/AccesDenied/Index";
+        }
+        );
 
 var app = builder.Build();
 
@@ -18,10 +29,11 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=SatinAlma}/{action=Liste}/{id?}");
+    pattern: "{controller=Login}/{action=Index}/{id?}");
 
 app.Run();
